@@ -8,6 +8,7 @@ artifacts/
 
 # Local configuration file (sdk path, etc)
 local.properties
+onboarding-test.local.properties
 
 # Android Studio
 .idea/
