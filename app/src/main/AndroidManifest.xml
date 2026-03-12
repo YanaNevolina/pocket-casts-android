@@ -601,6 +601,7 @@
 
         <service
                 android:name="au.com.shiftyjelly.pocketcasts.repositories.playback.PlaybackService"
+                android:enabled="false"
                 android:exported="true"
                 android:label="@string/app_name"
                 android:foregroundServiceType="mediaPlayback">
