@@ -19,6 +19,7 @@ android {
         minSdk = project.property("minSdkVersionAutomotive") as Int
         targetSdk = project.property("targetSdkVersionAutomotive") as Int
         applicationId = project.property("applicationId").toString()
+        testInstrumentationRunner = "au.com.shiftyjelly.pocketcasts.sharedtest.PocketCastsTestRunner"
     }
 
     buildFeatures {
@@ -131,9 +132,13 @@ dependencies {
     androidTestImplementation(libs.androidx.test.core)
     androidTestImplementation(libs.androidx.test.junit.ext)
     androidTestImplementation(libs.androidx.test.rules)
+    androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.espresso.core)
     androidTestImplementation(libs.junit)
     androidTestImplementation(libs.mockito.core)
     androidTestImplementation(libs.mockito.kotlin)
+    androidTestImplementation(libs.radiography)
+    androidTestImplementation(projects.modules.services.sharedtest)
 }
 
 apply(plugin = "com.google.gms.google-services")

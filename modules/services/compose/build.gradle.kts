@@ -22,7 +22,9 @@ dependencies {
     api(projects.modules.services.repositories)
     api(projects.modules.services.ui)
 
+
     implementation(platform(libs.compose.bom))
+    api(libs.compose.ui.tooling)
 
     implementation(libs.androidx.webkit)
     implementation(libs.coil.compose)
