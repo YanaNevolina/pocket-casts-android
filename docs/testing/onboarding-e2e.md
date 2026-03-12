@@ -1,13 +1,10 @@
 # Onboarding E2E Tests
 
-This document describes how to run onboarding end-to-end Android instrumentation tests locally and in GitHub Actions.
-
-## Tests Included
-
-- `au.com.shiftyjelly.pocketcasts.account.onboarding.e2e.LogInFullAppTest`
-- `au.com.shiftyjelly.pocketcasts.account.onboarding.e2e.OnboardingFullAppTest`
+This document describes how to run onboarding Android instrumentation tests locally and in GitHub Actions.
 
 ## Local Run
+
+Credentials can be provided via `onboarding-test.local.properties`, environment variables, or Gradle properties.
 
 1. Copy credentials template:
 
@@ -22,7 +19,14 @@ This document describes how to run onboarding end-to-end Android instrumentation
    onboardingTestPassword=your-test-password
    ```
 
-3. Run the tests:
+3. Run a single test:
+
+   ```bash
+   ./gradlew :app:connectedDebugAndroidTest \
+     -Pandroid.testInstrumentationRunnerArguments.class=au.com.shiftyjelly.pocketcasts.account.onboarding.e2e.LogInFullAppTest
+   ```
+
+4. Run both tests:
 
    ```bash
    ./gradlew :app:connectedDebugAndroidTest \
@@ -33,21 +37,16 @@ This document describes how to run onboarding end-to-end Android instrumentation
 
 Workflow file: `.github/workflows/android-onboarding-e2e.yml`.
 
-Required GitHub repository secrets:
+Required secrets:
 
 - `ONBOARDING_TEST_EMAIL`
 - `ONBOARDING_TEST_PASSWORD`
 
-The workflow:
-
-- starts an Android emulator (`api-level: 34`)
-- runs the two onboarding E2E test classes
-- publishes a JUnit summary in the GitHub Actions UI
-- uploads Android test reports as workflow artifacts
+The workflow runs the onboarding E2E tests, publishes a JUnit summary, and uploads Android test reports as artifacts.
 
 ## Troubleshooting
 
 - `Missing instrumentation argument 'onboardingEmail'` or `'onboardingPassword'`:
-  set local properties or CI secrets.
+  check `onboarding-test.local.properties`, environment variables, or Gradle properties.
 - Flaky UI steps:
-  re-run job and inspect artifact reports under `app/build/reports/androidTests/connected/`.
+  re-run the test and inspect reports under `app/build/reports/androidTests/connected/`.
